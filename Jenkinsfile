@@ -16,6 +16,13 @@ pipeline {
                 sh './jenkins/scripts/test.sh' 
             }
         }
+        stage(Manual Approval') {
+            steps {
+                input message: 'Lanjutkan ke tahap Deploy? Pilih "Proceed" atau "Abort"',
+                ok: 'Proceed',
+                parameters: [choice(name: 'PILIHAN', choices: 'Proceed\nAbort', description: '')]
+            }
+        }
         stage('Deploy') {
             steps {
                 sh  './jenkins/scripts/deliver.sh'
